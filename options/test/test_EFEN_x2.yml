@@ -1,0 +1,74 @@
+name: EFFSR_RFDB-WOA_EMSSA_8block_48channel_PSNR_DF2Kx2
+model_type: SRModel
+scale: 2
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+# python basicsr/test.py -opt options/test/test_EFEN_x2.yml
+
+datasets:
+  test_1:
+    name: set5
+    type: PairedImageDataset
+    dataroot_gt: datasets/set5/mod2/GT
+    dataroot_lq: datasets/set5/mod2/LRx2
+    io_backend:
+      type: disk
+  test_2:
+    name: set14
+    type: PairedImageDataset
+    dataroot_gt: datasets/set14/mod2/GT
+    dataroot_lq: datasets/set14/mod2/LRx2
+    io_backend:
+      type: disk
+  test_3:
+    name: BSD100
+    type: PairedImageDataset
+    dataroot_gt: datasets/BSD100/mod2/GT
+    dataroot_lq: datasets/BSD100/mod2/LRx2
+    io_backend:
+      type: disk
+  test_4:
+    name: Urban100
+    type: PairedImageDataset
+    dataroot_gt: datasets/Urban100/mod2/GT
+    dataroot_lq: datasets/Urban100/mod2/LRx2
+    io_backend:
+      type: disk
+  test_5:
+    name: Manga109
+    type: PairedImageDataset
+    dataroot_gt: datasets/Manga109/mod2/GT
+    dataroot_lq: datasets/Manga109/mod2/LRx2
+    io_backend:
+      type: disk
+
+
+# network structures
+network_g:
+  type: EFFN
+  channels: 48
+  num_DFEB: 8
+  upscale_factor: 2
+
+# path
+path:
+  pretrain_network_g: experiments/EFFSR_RFDB-WOA_EMSSA_8block_48channel_PSNR_DF2Kx4/models/net_g_750000.pth
+  param_key_g: params_ema
+  strict_load_g: true
+
+# validation settings
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    PSNR: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 2
+      test_y_channel: true
+      better: higher
+    SSIM:
+      type: calculate_ssim
+      crop_border: 2
+      test_y_channel: true
+      better: higher
