@@ -13,6 +13,7 @@ Yinggan Tang, Quanwei Hu, Chunning BU
 
 ### Installation
 ```
+git clone https://github.com/Supereeeee/EFEN.git
 pip install -r requirements.txt
 python setup.py develop
 ```
