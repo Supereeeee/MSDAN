@@ -41,20 +41,6 @@ datasets:
     dataroot_lq: datasets/Manga109/mod4/LRx4
     io_backend:
       type: disk
-  test_6:
-    name: General100
-    type: PairedImageDataset
-    dataroot_gt: datasets/General100/mod4/GT
-    dataroot_lq: datasets/General100/mod4/LRx4
-    io_backend:
-      type: disk
-  test_7:
-    name: DIV2K100
-    type: PairedImageDataset
-    dataroot_gt: datasets/DIV2K100/mod4/GT
-    dataroot_lq: datasets/DIV2K100/mod4/LRx4
-    io_backend:
-      type: disk
 
 # network structures
 network_g:
@@ -65,7 +51,7 @@ network_g:
 
 # path
 path:
-  pretrain_network_g: experiments/EFFSR_RFDB-WOA_EMSSA_8block_48channel_PSNR_DF2Kx4/models/net_g_750000.pth
+  pretrain_network_g: experiments/pretrained_models/EFFNx4.pth
   param_key_g: params_ema
   strict_load_g: true
 
