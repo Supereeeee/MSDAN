@@ -4,8 +4,11 @@ Yinggan Tang, Quanwei Hu, Chunning BU
 ## Environment
 
 [BasicSR >= 1.4.2]
+
 [PyTorch >= 1.13.0]
+
 [Torchvision >= 0.14.0]
+
 [Cuda >= 11.7]
 
 ### Installation
@@ -36,10 +39,13 @@ For more training commands and details, please check the docs in [BasicSR](https
 
 ## Model Complexity
 · The network structure of EFEN is palced at ./basicsr/EFEN_arch.py
+
 · We adopt thop tool to calculate model complexity, see ./basicsr/model_complexity.py
 
 ## Inference time
-· We tested the time required for the model on multiple benchmark datasets on a 140W fully powered 3060 laptop. You can run ./inference/inference_EFEN.py on your decive.
+· We tested the time required for the model on multiple benchmark datasets on a 140W fully powered 3060 laptop. 
+
+· You can run ./inference/inference_EFEN.py on your decive.
 
 ## Results
 The Complete results on benchmark datasets are available at [Google Drive] or [Baidu Netdisk].
