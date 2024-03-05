@@ -6,8 +6,8 @@ import torch.nn
 from torch import nn as nn
 from torch.nn import functional as F
 from basicsr.utils.registry import ARCH_REGISTRY
-from .arch_util import default_init_weights, make_layer
-from thop import profile  # 计算参数量和运算量
+from .arch_util import make_layer
+from thop import profile
 
 class BSConvU(torch.nn.Sequential):
     def __init__(self, in_channels, out_channels, kernel_size, padding=1, stride=1, dilation=1, bias=True,
