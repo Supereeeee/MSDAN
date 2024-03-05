@@ -34,8 +34,15 @@ python basicsr/train.py -opt options/train/train_EFEN_x4.yml
 ```
 For more training commands and details, please check the docs in [BasicSR](https://github.com/XPixelGroup/BasicSR)  
 
+## Model Complexity
+· The network structure of EFEN is palced at ./basicsr/EFEN_arch.py
+· We adopt thop tool to calculate model complexity, see ./basicsr/model_complexity.py
+
+## Inference time
+· We tested the time required for the model on multiple benchmark datasets on a 140W fully powered 3060 laptop. You can run ./inference/inference_EFEN.py on your decive.
+
 ## Results
-The inference results on benchmark datasets are available at [Google Drive] or [Baidu Netdisk].
+The Complete results on benchmark datasets are available at [Google Drive] or [Baidu Netdisk].
 
 ## Acknowledgement
 This code is based on [BasicSR](https://github.com/XPixelGroup/BasicSR) toolbox. Thanks for the awesome work.
