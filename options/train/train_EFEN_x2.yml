@@ -13,8 +13,6 @@ datasets:
     #dataroot_gt: datasets/DIV2K/DIV2K_train_HR_sub
     #dataroot_lq: datasets/DIV2K/DIV2K_train_LR_bicubic/X4_sub
     # (for lmdb)
-#    dataroot_gt: datasets/DIV2K/DIV2K_HRmod12_sub.lmdb
-#    dataroot_lq: datasets/DIV2K/DIV2K_LRmod12x4_sub.lmdb
     dataroot_gt: datasets/DF2K/DF2K_HRmod12_sub.lmdb
     dataroot_lq: datasets/DF2K/DF2K_LRmod12x2_sub.lmdb
     filename_tmpl: '{}'
@@ -50,7 +48,7 @@ network_g:
 
 # path
 path:
-  pretrain_network_g: ~ # experiments/MSPGAN_pre_1000000iter/models/net_g_730000.pth
+  pretrain_network_g: ~
   strict_load_g: true
   resume_state: ~
 
@@ -69,10 +67,7 @@ train:
     periods: [1000000]
     restart_weights: [1]
     eta_min: !!float 1e-7
-#  scheduler:
-#    type: MultiStepLR
-#    milestones: [200000, 300000, 400000, 450000]
-#    gamma: 0.5
+
 
   total_iter: 1000000
   warmup_iter: -1  # no warm up
