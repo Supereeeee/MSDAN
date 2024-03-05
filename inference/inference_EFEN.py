@@ -4,8 +4,8 @@ import glob
 import numpy as np
 import os
 import torch
-
-from basicsr.archs.rrdbnet_arch import RRDBNet
+import time
+from basicsr.archs.EFEN_arch import EFEN
 
 
 def main():
@@ -14,15 +14,15 @@ def main():
         '--model_path',
         type=str,
         default=  # noqa: E251
-        'experiments/pretrained_models/ESRGAN/ESRGAN_SRx4_DF2KOST_official-ff704c30.pth'  # noqa: E501
+        'experiments/pretrained_models/'  # noqa: E501
     )
-    parser.add_argument('--input', type=str, default='datasets/Set14/LRbicx4', help='input test image folder')
-    parser.add_argument('--output', type=str, default='results/ESRGAN', help='output folder')
+    parser.add_argument('--input', type=str, default='datasets/Set14/LRx4', help='input test image folder')
+    parser.add_argument('--output', type=str, default='results/EFEN', help='output folder')
     args = parser.parse_args()
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # set up model
-    model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32)
+    model = EFEN(channels=48, num_DFEB=8, upscale_factor=4)
     model.load_state_dict(torch.load(args.model_path)['params'], strict=True)
     model.eval()
     model = model.to(device)
@@ -46,8 +46,10 @@ def main():
             output = output.data.squeeze().float().cpu().clamp_(0, 1).numpy()
             output = np.transpose(output[[2, 1, 0], :, :], (1, 2, 0))
             output = (output * 255.0).round().astype(np.uint8)
-            cv2.imwrite(os.path.join(args.output, f'{imgname}_ESRGAN.png'), output)
+            cv2.imwrite(os.path.join(args.output, f'{imgname}.png'), output)
 
 
 if __name__ == '__main__':
+    time1 = time.time()
     main()
+    print(time.time()-time1, 's')
