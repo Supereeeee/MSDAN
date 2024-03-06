@@ -208,6 +208,30 @@ class RFDB_WOA(nn.Module):
         return out
 
 
+class RFDB_PAB(nn.Module):
+    def __init__(self, channels):
+        super(RFDB_PAB, self).__init__()
+        self.BSConv3 = BSConvU(channels, channels, kernel_size=3, padding=1)
+        self.conv3_half = nn.Conv2d(channels, channels // 2, kernel_size=3, padding=1)
+        self.conv1 = nn.Conv2d(in_channels=channels, out_channels=channels, kernel_size=1, stride=1, padding=0)
+        self.conv1_half = nn.Conv2d(in_channels=channels, out_channels=channels // 2, kernel_size=1, stride=1, padding=0)
+        self.conv1_down = nn.Conv2d(in_channels=channels * 2, out_channels=channels, kernel_size=1, stride=1, padding=0)
+        self.ReLU = nn.ReLU(inplace=True)
+        self.GELU = nn.GELU()
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, x):    # 48 channels
+        x1 = self.ReLU(self.conv1_half(x))    # 24 channels
+        x2 = torch.mul(self.sigmoid(self.conv1(x)), self.GELU(self.BSConv3(x)))    # 48 channels
+        x3 = self.ReLU(self.conv1_half(x2))    # 24 channels
+        x4 = torch.mul(self.sigmoid(self.conv1(x2)), self.GELU(self.BSConv3(x2)))    # 48 channels
+        x5 = self.ReLU(self.conv1_half(x4))    # 24 channels
+        x6 = self.ReLU(self.conv3_half(torch.mul(self.sigmoid(self.conv1(x4)), self.GELU(self.BSConv3(x4)))))    # 24 channels
+        out = torch.cat((x1, x3, x5, x6), 1)    # 96 channels
+        out = self.ReLU(self.conv1_down(out))    # 48 channels
+        return out
+
+
 class upsampler(nn.Module):
     def __init__(self, channels, upscale_factor, mid_channels=54):
         super(upsampler, self).__init__()
@@ -268,14 +292,19 @@ class DFEB(nn.Module):
         self.EBFB = EBFB(channels)
         # self.EBFB_SRB = EBFB_SRB(channels)
         # self.RFDB_WOA = RFDB_WOA(channels)
+        # self.RFDB_PAB = RFDB_PAB(channels)
+        
         # self.ESA = ESA(channels)
         self.EMSSA = EMSSA(channels)
         # self.SAFM = SAFM(channels)
+
 
     def forward(self, x0):
         x = self.EBFB(x0)
         # x = self.EBFB_SRB(x0)
         # x = self.RFDB_WOA(x0)
+        # x = self.RFDB_PAB(x0)
+        
         x = self.EMSSA(x)
         # x = self.SAFM(x)
         # x = self.ESA(x)
