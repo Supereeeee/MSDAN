@@ -1,5 +1,5 @@
 # general settings
-name: EFFSR_RFDB-WOA_EMSSA_8block_48channel_PSNR_DF2Kx2
+name: EFEN_DF2Kx2_EBFB_EMSSA_8block_48channel_l1_1000k
 model_type: SRModel
 scale: 2
 num_gpu: 1  # set num_gpu: 0 for cpu mode
@@ -26,9 +26,9 @@ datasets:
     use_rot: true
 
     # data loader
-    num_worker_per_gpu: 14 # best
-    batch_size_per_gpu: 128
-    dataset_enlarge_ratio: 1 # 1
+    num_worker_per_gpu: 14
+    batch_size_per_gpu: 64
+    dataset_enlarge_ratio: 1
     prefetch_mode: ~
 
   val:
@@ -58,7 +58,6 @@ train:
   optim_g:
     type: Adam
     lr: !!float 1e-3
-#    lr: !!float 5e-4    # for ablation experiments of EMSSA
     weight_decay: 0
     betas: [0.9, 0.99]
 
@@ -81,7 +80,7 @@ train:
 # validation settings
 val:
   val_freq: !!float 5e3
-  save_img: false
+  save_img: true
 
   metrics:
     PSNR: # metric name, can be arbitrary
@@ -94,10 +93,7 @@ val:
       crop_border: 2
       test_y_channel: true
       better: higher
-    NIQE:
-      type: calculate_niqe
-      crop_border: 2
-      better: lower
+
 
 # logging settings
 logger:
