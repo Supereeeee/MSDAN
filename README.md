@@ -45,7 +45,7 @@ For more training commands and details, please check the docs in [BasicSR](https
 · We adopt thop tool to calculate model complexity, see ./basicsr/model_complexity.py
 
 ## Inference time
-· We tested the time required for the model on multiple benchmark datasets on a 140W fully powered 3060 laptop. 
+· We test the inference time on multiple benchmark datasets on a 140W fully powered 3060 laptop. 
 
 · You can run ./inference/inference_EFEN.py on your decive.
 
