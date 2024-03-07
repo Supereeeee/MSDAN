@@ -10,7 +10,7 @@ from basicsr.archs.EFEN_arch import EFEN
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_path', type=str, default='experiments/pretrained_models/EFFN_x4.pth')
+    parser.add_argument('--model_path', type=str, default='experiments/pretrained_models/EFEN_DF2K_x4_1000k.pth')
     parser.add_argument('--input', type=str, default='datasets/set14/mod4/LRx4', help='input test image folder')
     parser.add_argument('--output', type=str, default='results/EFEN', help='output folder')
     args = parser.parse_args()
