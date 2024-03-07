@@ -3,13 +3,9 @@ Yinggan Tang, Quanwei Hu, Chunning BU
 
 ## Environment in our experiments
 
-[BasicSR 1.4.2]
+[BasicSR 1.4.2](https://github.com/XPixelGroup/BasicSR)
 
-[PyTorch 1.13.0]
-
-[Torchvision 0.14.0]
-
-[Cuda 11.7]
+[PyTorch 1.13.0, Torchvision 0.14.0, Cuda 11.7](https://pytorch.org/get-started/previous-versions/)
 
 (conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 pytorch-cuda=11.7 -c pytorch -c nvidia)
 ### Installation
