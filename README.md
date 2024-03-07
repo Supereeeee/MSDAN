@@ -2,6 +2,9 @@
 Yinggan Tang, Quanwei Hu, Chunning BU
 
 ## Environment in our experiments
+[python 3.8]
+
+[Ubuntu 18.04]
 
 [BasicSR 1.4.2](https://github.com/XPixelGroup/BasicSR)
 
@@ -15,9 +18,9 @@ python setup.py develop
 ```
 
 ## How To Test
-· Refer to ./options/test for the configuration file of the model to be tested, and prepare the testing data and pre-trained model.  
+· Refer to ./options/test for the configuration file of the model to be tested and prepare the testing data.  
 
-· Place the pre-trained models in ./experiments/pretrained_models/  
+· The pre-trained models have been palced in ./experiments/pretrained_models/  
 
 · Then run the follwing codes (taking EFENx4.pth as an example):  
 
@@ -49,8 +52,6 @@ For more training commands and details, please check the docs in [BasicSR](https
 
 · You can run ./inference/inference_EFEN.py on your decive.
 
-## Results
-The results on benchmark datasets and pre-trained models are available at [Google Drive] or [Baidu Netdisk].
 
 ## Acknowledgement
 This code is based on [BasicSR](https://github.com/XPixelGroup/BasicSR) toolbox. Thanks for the awesome work.
