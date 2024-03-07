@@ -10,7 +10,7 @@ Yinggan Tang, Quanwei Hu, Chunning BU
 [Torchvision 0.14.0]
 
 [Cuda 11.7]
-
+(conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 pytorch-cuda=11.7 -c pytorch -c nvidia)
 ### Installation
 ```
 git clone https://github.com/Supereeeee/EFEN.git
@@ -19,9 +19,9 @@ python setup.py develop
 ```
 
 ## How To Test
-· Refer to ./options/test for the configuration file of the model to be tested, and prepare the testing data and pretrained model.  
+· Refer to ./options/test for the configuration file of the model to be tested, and prepare the testing data and pre-trained model.  
 
-· The pretrained models are available at [Google Drive] or [Baidu Netdisk]. Place the pretrained models in ./experiments/pretrained_models/  
+· Place the pre-trained models in ./experiments/pretrained_models/  
 
 · Then run the follwing codes (taking EFENx4.pth as an example):  
 
@@ -54,7 +54,7 @@ For more training commands and details, please check the docs in [BasicSR](https
 · You can run ./inference/inference_EFEN.py on your decive.
 
 ## Results
-The Complete results on benchmark datasets are available at [Google Drive] or [Baidu Netdisk].
+The results on benchmark datasets and pre-trained models are available at [Google Drive] or [Baidu Netdisk].
 
 ## Acknowledgement
 This code is based on [BasicSR](https://github.com/XPixelGroup/BasicSR) toolbox. Thanks for the awesome work.
