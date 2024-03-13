@@ -21,7 +21,7 @@ datasets:
       # (for lmdb)
       type: lmdb
 
-    gt_size: 80
+    gt_size: 80    # 40*40 LR input
     use_hflip: true
     use_rot: true
 
