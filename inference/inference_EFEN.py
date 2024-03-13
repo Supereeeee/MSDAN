@@ -1,17 +1,18 @@
 import argparse
+import time
 import cv2
 import glob
 import numpy as np
 import os
 import torch
-import time
+from collections import OrderedDict
 from basicsr.archs.EFEN_arch import EFEN
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_path', type=str, default='experiments/pretrained_models/EFEN_DF2K_x4_1000k.pth')
-    parser.add_argument('--input', type=str, default='datasets/set14/mod4/LRx4', help='input test image folder')
+    parser.add_argument('--model_path', type=str, default='../experiments/pretrained_models/EFEN_x4.pth')
+    parser.add_argument('--input', type=str, default='../datasets/set14/mod4/LRx4', help='input test image folder')
     parser.add_argument('--output', type=str, default='results/EFEN', help='output folder')
     args = parser.parse_args()
 
@@ -21,6 +22,12 @@ def main():
     model.load_state_dict(torch.load(args.model_path)['params'], strict=True)
     model.eval()
     model = model.to(device)
+
+    test_results = OrderedDict()
+    test_results['runtime'] = []
+
+    start = torch.cuda.Event(enable_timing=True)
+    end = torch.cuda.Event(enable_timing=True)
 
     os.makedirs(args.output, exist_ok=True)
     for idx, path in enumerate(sorted(glob.glob(os.path.join(args.input, '*')))):
@@ -33,7 +40,11 @@ def main():
         # inference
         try:
             with torch.no_grad():
+                start.record()
                 output = model(img)
+                end.record()
+                torch.cuda.synchronize()
+                test_results['runtime'].append(start.elapsed_time(end))  # milliseconds
         except Exception as error:
             print('Error', error, imgname)
         else:
@@ -43,8 +54,11 @@ def main():
             output = (output * 255.0).round().astype(np.uint8)
             cv2.imwrite(os.path.join(args.output, f'{imgname}.png'), output)
 
+    tot_runtime = sum(test_results['runtime']) / 1000.0
+    ave_runtime = sum(test_results['runtime']) / len(test_results['runtime']) / 1000.0
+    print('------> Total runtime of ({}) is : {:.6f} seconds = {:.2f} ms'.format(args.input, tot_runtime, tot_runtime * 1000))
+    print('------> Average runtime of ({}) is : {:.6f} seconds = {:.2f} ms'.format(args.input, ave_runtime, ave_runtime * 1000))
 
 if __name__ == '__main__':
-    time1 = time.time()
     main()
-    print(time.time()-time1, 's')
+
