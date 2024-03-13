@@ -52,7 +52,7 @@ network_g:
 
 # path
 path:
-  pretrain_network_g: experiments/pretrained_models/EFEN_DF2K_x2_1000k.pth
+  pretrain_network_g: experiments/pretrained_models/EFEN_x2.pth
   param_key_g: params_ema
   strict_load_g: true
 
