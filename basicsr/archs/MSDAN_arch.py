@@ -313,9 +313,9 @@ class DFEB(nn.Module):
 
 
 @ARCH_REGISTRY.register()
-class EFEN(nn.Module):
+class MSDAN(nn.Module):
     def __init__(self, channels, num_DFEB, upscale_factor):
-        super(EFEN, self).__init__()
+        super(MSDAN, self).__init__()
         self.layers = make_layer(basic_block=DFEB, num_basic_block=num_DFEB, channels=channels)
         self.BSConv_first = BSConvU(3, channels, kernel_size=3, padding=1)
         self.upsampler = upsampler(channels, upscale_factor)
