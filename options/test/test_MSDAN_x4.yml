@@ -1,4 +1,4 @@
-name: MSDAN_DF2K_x4_1000k
+name: MSDAN_x4
 model_type: SRModel
 scale: 4
 num_gpu: 1  # set num_gpu: 0 for cpu mode
