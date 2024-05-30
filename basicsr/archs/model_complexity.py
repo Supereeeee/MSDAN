@@ -1,8 +1,8 @@
 from thop import profile
 import torch
-from .EFEN_arch import EFEN
+from .MSDAN_arch import MSDAN
 
-net = EFEN(channels=48, num_DFEB=8, upscale_factor=4)
+net = MSDAN(channels=48, num_DFEB=8, upscale_factor=4)
 input = torch.randn(1, 3, 320, 180)
 flops, params = profile(net, (input,))
 print('flops[G]: ', flops/1e9, 'params[K]: ', params/1e3)
