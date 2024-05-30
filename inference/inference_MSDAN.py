@@ -6,19 +6,19 @@ import numpy as np
 import os
 import torch
 from collections import OrderedDict
-from basicsr.archs.EFEN_arch import EFEN
+from basicsr.archs.MSDAN_arch import MSDAN
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_path', type=str, default='../experiments/pretrained_models/EFEN_x4.pth')
+    parser.add_argument('--model_path', type=str, default='../experiments/pretrained_models/MSDAN_x4.pth')
     parser.add_argument('--input', type=str, default='../datasets/set14/mod4/LRx4', help='input test image folder')
-    parser.add_argument('--output', type=str, default='results/EFEN', help='output folder')
+    parser.add_argument('--output', type=str, default='results/MSDAN', help='output folder')
     args = parser.parse_args()
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # set up model
-    model = EFEN(channels=48, num_DFEB=8, upscale_factor=4)
+    model = MSDAN(channels=48, num_DFEB=8, upscale_factor=4)
     model.load_state_dict(torch.load(args.model_path)['params'], strict=True)
     model.eval()
     model = model.to(device)
