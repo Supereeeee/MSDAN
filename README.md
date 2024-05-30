@@ -1,4 +1,4 @@
-# Efficient feature extraction network for image super-resolution(EFEN)
+# MSDAN: A lightweight multi-scale distillation attention network for image super-resolution
 Yinggan Tang, Quanwei Hu, Chunning BU
 
 ## Environment in our experiments
