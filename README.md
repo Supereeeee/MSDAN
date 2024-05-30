@@ -22,7 +22,7 @@ python setup.py develop
 
 · The pre-trained models have been palced in ./experiments/pretrained_models/  
 
-· Then run the follwing codes (taking MSDANx4.pth as an example):  
+· Then run the follwing codes (taking MSDAN_x4.pth as an example):  
 
 ```
 python basicsr/test.py -opt options/test/test_MSDAN_x4.yml
