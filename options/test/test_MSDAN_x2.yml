@@ -1,9 +1,9 @@
-name: EFEN_DF2K_x2_1000k
+name: MSDAN_DF2K_x2_1000k
 model_type: SRModel
 scale: 2
 num_gpu: 1  # set num_gpu: 0 for cpu mode
 manual_seed: 0
-# python basicsr/test.py -opt options/test/test_EFEN_x2.yml
+# python basicsr/test.py -opt options/test/test_MSDAN_x2.yml
 
 datasets:
   test_1:
@@ -45,14 +45,14 @@ datasets:
 
 # network structures
 network_g:
-  type: EFFN
+  type: MSDAN
   channels: 48
   num_DFEB: 8
   upscale_factor: 2
 
 # path
 path:
-  pretrain_network_g: experiments/pretrained_models/EFEN_x2.pth
+  pretrain_network_g: experiments/pretrained_models/MSDAN_x2.pth
   param_key_g: params_ema
   strict_load_g: true
 
