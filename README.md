@@ -4,7 +4,7 @@ Yinggan Tang, Quanwei Hu, Chunning Bu
 ## Environment in our experiments
 [python 3.8]
 
-[Ubuntu 18.04]
+[Ubuntu 20.04]
 
 [BasicSR 1.4.2](https://github.com/XPixelGroup/BasicSR)
 
