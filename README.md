@@ -1,5 +1,5 @@
 # MSDAN: A lightweight multi-scale distillation attention network for image super-resolution
-Yinggan Tang, Quanwei Hu, Chunning BU
+Yinggan Tang, Quanwei Hu, Chunning Bu
 
 ## Environment in our experiments
 [python 3.8]
