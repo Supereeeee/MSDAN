@@ -1,4 +1,4 @@
-# Lightweight multi-scale distillation attention network for image super-resolution
+# Lightweight multi-scale distillation attention network for image super-resolution [[paper link]](https://www.sciencedirect.com/science/article/abs/pii/S0950705124014412)
 
 ## Environment in our experiments
 [python 3.8]
